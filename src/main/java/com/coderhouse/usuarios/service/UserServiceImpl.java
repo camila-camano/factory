@@ -5,6 +5,8 @@ import com.coderhouse.usuarios.model.UserFactory;
 import com.coderhouse.usuarios.model.types.Admin;
 import com.coderhouse.usuarios.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +22,12 @@ public class UserServiceImpl implements UserService{
     private final UserFactory userFactory = new UserFactory();
 
     List<User> users = new ArrayList<>();
+
+
+
+    @Autowired
+    private MongoTemplate template;
+
 
     @Override
     public String create(String type, String name){
