@@ -41,6 +41,15 @@ public class CacheClientImpl<T> implements CacheClient<T> {
     }
 
     @Override
+    public void saveCache(String key, T data){
+        try {
+            hashOperations.put(Constants.NAME_MAP_MESSAGE, key, serializeItem(data));
+        }catch (JsonProcessingException e) {
+            log.error("Error converting message to string", e);
+        }
+    }
+
+    @Override
     public T recover(String key, Class<T> classValue) {
         try {
             var item = hashOperations.get(Constants.NAME_MAP_MESSAGE, key);
